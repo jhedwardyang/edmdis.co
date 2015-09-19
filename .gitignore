@@ -1,3 +1,7 @@
+##### OTHER
+*.wav
+*.mp3
+
 #### OSX
 .DS_Store
 .AppleDouble
