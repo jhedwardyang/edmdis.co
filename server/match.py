@@ -7,9 +7,9 @@ def match(filename1,filename2):
 	song2 = AudioSegment.from_wav(filename2)
 	bpm1,peaks1 = bpm_detection.bpm_detection(filename1,3)
 	bpm2,peaks2 = bpm_detection.bpm_detection(filename2,3)
-	song1_match = song1[9000+peaks1[3]:] - 4
-	song2_match = song2[peaks2[0]:].fade_in(2000).fade_out(2000) + 4
-	music = song1[:9000+peaks1[3]].append(song1_match.overlay(song2_match, position=0))
+	song1_match = song1[9000+peaks1[1]:] - 10
+	song2_match = song2[peaks2[0]:].fade_in(2000).fade_out(2000) + 10
+	music = song1[:9000+peaks1[1]].append(song1_match.overlay(song2_match, position=0))
 	return music.fade_in(2000)
 
 if __name__ == '__main__':
