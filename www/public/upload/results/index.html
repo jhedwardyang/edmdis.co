@@ -38,7 +38,7 @@
 			console.log(data);
 
 			//for(x=0; x < data.length; x++) {
-				if (UrlExists(data.file) /*&& (x== data.length - 1)*/) {
+				if (UrlExists('../../uploads/' + data.file.substring(0, data.file.length-4) + '_finaloncelydian.wav') /*&& (x== data.length - 1)*/) {
 					Loaded = true;
 				}
 			//}
@@ -63,8 +63,13 @@
 	function displayUploads() {
 		data = localStorage.getItem('lists');
 		data = JSON.parse(data);
+		postfix = ["Pop", "Calvin Harris", "Once Lydian"]
+		audios = ['../../uploads/' + data.file.substring(0, data.file.length-4) + '_finalpop.wav', '../../uploads/' + data.file.substring(0, data.file.length-4) + '_finalcalvin.wav', '../../uploads/' + data.file.substring(0, data.file.length-4) + '_finaloncelydian.wav'];
 		//for(x=0; x < data.length; x++) {
-			document.getElementById('resultzone').innerHTML += ("<h1>" + data.name + "</h1><audio controls> <source src='" + data.file + "' type='audio/mpeg'>" + '</audio>');
+
+			for (i=0;i<audios.length;++i) {
+			document.getElementById('resultzone').innerHTML += ("<h1>" + data.name + " (" + postfix[i] + ")" + "</h1><audio controls> <source src='" + audios[i] + "' type='audio/mpeg'>" + '</audio>');
+		}
 		//}
 		
 	}
