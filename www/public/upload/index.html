@@ -32,9 +32,7 @@
 
 		var displayUploads = function(data) {
 			localStorage.setItem('lists', data);
-
-			document.getElementById('dropzone').innerHTML = "<h1><a href='./results/index.html'>Results</a></h1>";
-			
+			window.location.href = './results/index.html';
 		}
 
 		var upload = function(files) {
