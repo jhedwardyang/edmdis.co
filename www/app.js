@@ -22,7 +22,7 @@ var request = require('request');
 var multer      =    require('multer');
 app.use(multer({ dest: '../songs/',
  rename: function (fieldname, filename) {
-    return "edm_" + filename;
+    return filename;
   },
 onFileUploadStart: function (file) {
   console.log(file.originalname + ' is starting ...')
