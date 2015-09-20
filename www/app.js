@@ -19,6 +19,27 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var multer      =    require('multer');
+app.use(multer({ dest: '../songs/',
+ rename: function (fieldname, filename) {
+    return "edm_" + filename;
+  },
+onFileUploadStart: function (file) {
+  console.log(file.originalname + ' is starting ...')
+},
+onFileUploadComplete: function (file) {
+  console.log(file.fieldname + ' uploaded to  ' + file.path)
+  done=true;
+}
+}));
+app.post('/upload',function(req,res){
+  if(done==true){
+    console.log(req.files["file[]"]);
+    var result = { name: req.files["file[]"].originalname, file: 'edm_' + req.files["file[]"].originalname };
+    res.send(result); 
+  }
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

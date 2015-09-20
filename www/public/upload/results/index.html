@@ -35,12 +35,13 @@
 			data = localStorage.getItem('lists');
 
 			data = JSON.parse(data);
+			console.log(data);
 
-			for(x=0; x < data.length; x++) {
-				if (UrlExists(data[x].file) && (x== data.length - 1)) {
+			//for(x=0; x < data.length; x++) {
+				if (UrlExists(data.file) /*&& (x== data.length - 1)*/) {
 					Loaded = true;
-				};		
-			}
+				}
+			//}
 			if (Loaded) {
 				var load_screen = document.getElementById("loading-screen");
 				document.body.removeChild(load_screen);
@@ -62,9 +63,9 @@
 	function displayUploads() {
 		data = localStorage.getItem('lists');
 		data = JSON.parse(data);
-		for(x=0; x < data.length; x++) {
-			document.getElementById('resultzone').innerHTML += ("<h1>" + data[x].name + "</h1><audio controls> <source src='" + data[x].file + "' type='audio/mpeg'>" + '</audio>');
-		}
+		//for(x=0; x < data.length; x++) {
+			document.getElementById('resultzone').innerHTML += ("<h1>" + data.name + "</h1><audio controls> <source src='" + data.file + "' type='audio/mpeg'>" + '</audio>');
+		//}
 		
 	}
 
