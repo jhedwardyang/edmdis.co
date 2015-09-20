@@ -17,7 +17,7 @@ class process:
     print 'start'
 
     target_wav = '../songs/' + user_data.input_song[:-4] + '.wav'
-    mp3towav.mp3towav(user_data.input_song, target_wav);
+    mp3towav.mp3towav('../songs/' + user_data.input_song, target_wav);
     print 'done conversion'
 
     print 'isolating', target_wav
