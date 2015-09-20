@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+var request = require('request');
 var multer      =    require('multer');
 app.use(multer({ dest: '../songs/',
  rename: function (fieldname, filename) {
@@ -30,13 +30,20 @@ onFileUploadStart: function (file) {
 onFileUploadComplete: function (file) {
   console.log(file.fieldname + ' uploaded to  ' + file.path)
   done=true;
+
+request('http://localhost:8080/process?input_song=' + file.originalname, function (error, response, body) {
+  if (!error && response.statusCode == 200) {
+    console.log(body) // Show the HTML for the Google homepage.
+  }
+});
 }
 }));
 app.post('/upload',function(req,res){
   if(done==true){
     console.log(req.files["file[]"]);
     var result = { name: req.files["file[]"].originalname, file: 'edm_' + req.files["file[]"].originalname };
-    res.send(result); 
+    res.send(result);
+
   }
 });
 
