@@ -108,7 +108,7 @@ def bpm_detector(data,fs):
     peak_ndx_adjusted = peak_ndx[0]+min_ndx;
     bpm = 60./ peak_ndx_adjusted * (fs/max_decimation)
     #print bpm
-    return bpm,correl
+    return bpm,correl,peak_ndx_adjusted
     
 def bpm_detection(filename, window):
     samps,fs = read_wav(filename)
@@ -122,6 +122,7 @@ def bpm_detection(filename, window):
     samps_ndx = 0;  #first sample in window_ndx 
     max_window_ndx = nsamps / window_samps;
     bpms = numpy.zeros(max_window_ndx)
+    peaks = []
 
     #iterate through all windows
     for window_ndx in xrange(1,max_window_ndx):
@@ -131,7 +132,8 @@ def bpm_detection(filename, window):
         if not ((len(data) % window_samps) == 0):
             raise AssertionError( str(len(data) ) ) 
         
-        bpm, correl_temp = bpm_detector(data,fs)
+        bpm, correl_temp,peak_ndx_adjusted = bpm_detector(data,fs)
+        peaks.extend(peak_ndx_adjusted)
         if bpm == None:
             continue
         bpms[window_ndx] = bpm
@@ -149,7 +151,7 @@ def bpm_detection(filename, window):
     plt.show(False); #plot non-blocking
     time.sleep(10);
     plt.close();
-    return bpm
+    return bpm, peaks
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process .wav file to determine the Beats Per Minute.')
@@ -160,4 +162,6 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    print bpm_detection(args.filename, args.window);
+    bpm,peaks = bpm_detection(args.filename, args.window);
+    print bpm
+    print peaks
