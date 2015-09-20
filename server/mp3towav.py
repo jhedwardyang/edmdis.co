@@ -10,6 +10,9 @@
 from pydub import AudioSegment
 import argparse
 
+def test():
+	print 'asdf'
+
 def mp3towav(filename, output):
 	song = AudioSegment.from_mp3(filename);
 	song.export(output, format="wav")
