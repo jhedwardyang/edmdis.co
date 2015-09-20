@@ -10,7 +10,7 @@
 
 	<title>emddisco results</title>
 </head>
-<body  onload="displayUploads()">
+<body>
 	<div id='cssmenu'>
 		<ul>
 			<li> <a href='../../index.html'><span>Home</span></a></li>
@@ -46,6 +46,7 @@
 				var load_screen = document.getElementById("loading-screen");
 				document.body.removeChild(load_screen);
 				clearInterval(loadInterval);
+				displayUploads();
 			};
 		}, 3000);
 	});
@@ -68,7 +69,7 @@
 		//for(x=0; x < data.length; x++) {
 
 			for (i=0;i<audios.length;++i) {
-			document.getElementById('resultzone').innerHTML += ("<h1>" + data.name + " (" + postfix[i] + ")" + "</h1><audio controls> <source src='" + audios[i] + "' type='audio/mpeg'>" + '</audio>');
+				document.getElementById('resultzone').innerHTML += ("<h1>" + data.name + " (" + postfix[i] + ")" + "</h1><audio controls> <source src='" + audios[i] + "' type='audio/mpeg'>" + '</audio>');
 		}
 		//}
 		
