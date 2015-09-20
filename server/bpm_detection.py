@@ -14,7 +14,6 @@ import wave, array, math, time, argparse, sys
 import numpy, pywt
 from scipy import signal
 import pdb
-import matplotlib.pyplot as plt
 
 def read_wav(filename):
 
@@ -147,10 +146,7 @@ def bpm_detection(filename, window):
     #print bpm
     
     n = range(0,len(correl))
-    plt.plot(n,abs(correl)); 
-    plt.show(False); #plot non-blocking
     time.sleep(10);
-    plt.close();
     return bpm, peaks
 
 if __name__ == '__main__':
